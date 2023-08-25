@@ -11,4 +11,3 @@ program
   .helpOption('-h, --help', 'output usage information');
 
 program.parse();
-// console.log(program);
