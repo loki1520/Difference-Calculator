@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+// test
 import { Command } from 'commander';
 
 const program = new Command();
