@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const comparison = (obj1, obj2) => {
-  const keys = _.sortBy(_.uniq(Object.keys(obj1), Object.keys(obj2)));
+  const keys = _.sortBy(_.uniq([...Object.keys(obj1), ...Object.keys(obj2)]));
 
   const getTree = keys.map((key) => {
     if (key in obj1 && key in obj2 && obj1[key] === obj2[key]) {
