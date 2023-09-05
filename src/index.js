@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import render from './findObjectDifferences.js';
+import render from './render.js';
 
 const getCurrentWorkDir = () => process.cwd();
 const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), filepath);
