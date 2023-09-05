@@ -3,7 +3,7 @@ import _ from 'lodash';
 const getTree = (obj1, obj2) => {
   const keys = _.sortBy(_.uniq([...Object.keys(obj1), ...Object.keys(obj2)]));
 
-  const result = keys.map((key) => {
+  return keys.map((key) => {
     if (_.isEqual(obj1[key], obj2[key])) {
       return {
         key,
@@ -32,8 +32,6 @@ const getTree = (obj1, obj2) => {
       type: 'changed',
     };
   });
-
-  return result;
 };
 
 export default getTree;

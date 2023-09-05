@@ -1,9 +1,9 @@
 import getTree from './getTree.js';
 
-const findObjectDifferences = (obj1, obj2) => {
-  const prepairedTree = getTree(obj1, obj2);
+const render = (obj1, obj2) => {
+  const tree = getTree(obj1, obj2);
 
-  const result = prepairedTree.reduce((acc, obj) => {
+  const result = tree.reduce((acc, obj) => {
     if (obj.type === 'unchanged') {
       return `${acc}  ${obj.key}: ${obj.value}\n`;
     }
@@ -22,4 +22,4 @@ const findObjectDifferences = (obj1, obj2) => {
   return `{\n${result}}`;
 };
 
-export default findObjectDifferences;
+export default render;

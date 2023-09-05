@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import findObjectDifferences from './findObjectDifferences.js';
+import render from './findObjectDifferences.js';
 
 const getCurrentWorkDir = () => process.cwd();
 const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), filepath);
@@ -14,7 +14,7 @@ const genDiff = (filepath1, filepath2) => {
   const obj1 = getObj(absolutePathToFile1);
   const obj2 = getObj(absolutePathToFile2);
 
-  return findObjectDifferences(obj1, obj2);
+  return render(obj1, obj2);
 };
 
 export default genDiff;
