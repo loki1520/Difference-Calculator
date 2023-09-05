@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import findObjectDifferences from './comparison.js';
+import findObjectDifferences from './findObjectDifferences.js';
 
 const getCurrentWorkDir = () => process.cwd();
 const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), filepath);

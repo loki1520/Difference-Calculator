@@ -32,22 +32,8 @@ const getTree = (obj1, obj2) => {
       type: 'changed',
     };
   });
+
   return result;
 };
 
 export default getTree;
-
-// const a = {
-//   host: 'hexlet.io',
-//   timeout: 50,
-//   proxy: '123.234.53.22',
-//   follow: false,
-// }
-
-// const b = {
-//   timeout: 20,
-//   verbose: true,
-//   host: 'hexlet.io',
-// }
-
-// console.log(getTree(a, b));
