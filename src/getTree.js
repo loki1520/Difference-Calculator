@@ -25,6 +25,7 @@ const getTree = (obj1, obj2) => {
         type: 'added',
       };
     }
+
     return {
       key,
       value1: obj1[key],
