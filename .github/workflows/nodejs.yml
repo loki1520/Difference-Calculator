@@ -1,5 +1,5 @@
 # Name of workflow
-name: Node CI
+name: Node CI 🦠
 
 # Trigger the workflow on push or pull request
 on:
@@ -26,7 +26,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
         # Step's name
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }} 🚀
         # Configures the node version used on GitHub-hosted runners
         # https://github.com/actions/setup-node
         uses: actions/setup-node@v3
@@ -36,11 +36,11 @@ jobs:
           cache: 'npm'
       - name: Install 🔧
         run: make install
-      - name: Make lint
+      - name: Make lint 💀
         run: make lint
       - name: Run Test 🔨
         run: make test
-      - name: Test & publish code coverage
+      - name: Test & publish code coverage ⛓️
         # Publish code coverage on Code Climate
         # https://github.com/paambaati/codeclimate-action
         uses: paambaati/codeclimate-action@v4.0.0
