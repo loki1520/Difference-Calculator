@@ -8,7 +8,8 @@
   },
   "description": "[![Actions Status](https://github.com/loki1520/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/loki1520/frontend-project-46/actions)",
   "scripts": {
-    "test": "npx jest"
+    "test": "npx jest",
+    "test:watch": "jest --watch"
   },
   "author": "Ivan Ivashchenko",
   "license": "ISC",
