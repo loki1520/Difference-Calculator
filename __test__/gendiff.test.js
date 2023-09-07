@@ -1,7 +1,6 @@
 import { test, expect } from '@jest/globals';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import path from 'path';
+import path, { dirname } from 'path';
 import fs from 'fs';
 import genDiff from '../src/index.js';
 
