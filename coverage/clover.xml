@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1694068274641" clover="3.2.0">
-  <project timestamp="1694068274641" name="All files">
+<coverage generated="1694073339717" clover="3.2.0">
+  <project timestamp="1694073339717" name="All files">
     <metrics statements="65" coveredstatements="64" conditionals="19" coveredconditionals="18" methods="6" coveredmethods="6" elements="90" coveredelements="88" complexity="0" loc="65" ncloc="65" packages="1" files="3" classes="3"/>
     <file name="getTree.js" path="/Users/loki/Documents/Visual studio Code/frontend-project-46/src/getTree.js">
       <metrics statements="22" coveredstatements="22" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
