@@ -23,7 +23,8 @@ jobs:
     steps:
         # Check-out repository under GitHub workspace
         # https://github.com/actions/checkout
-      - uses: actions/checkout@v3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
         # Step's name
       - name: Use Node.js ${{ matrix.node-version }}
         # Configures the node version used on GitHub-hosted runners
@@ -33,9 +34,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: make install
-      - run: make lint
-      - run: make test
+      - name: Install 🔧
+        run: make install
+      - name: Make lint
+        run: make lint
+      - name: Run Test 🔨
+        run: make test
       - name: Test & publish code coverage
         # Publish code coverage on Code Climate
         # https://github.com/paambaati/codeclimate-action
