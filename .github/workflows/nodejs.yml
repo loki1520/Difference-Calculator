@@ -34,13 +34,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Install 🔧
+      - name: Install 🌲
         run: make install
-      - name: Make lint 💀
+      - name: Make lint 🌴
         run: make lint
-      - name: Run Test 🔨
+      - name: Run Test 🌳
         run: make test
-      - name: Test & publish code coverage ⛓️
+      - name: Test & publish code coverage 🌱
         # Publish code coverage on Code Climate
         # https://github.com/paambaati/codeclimate-action
         uses: paambaati/codeclimate-action@v4.0.0
