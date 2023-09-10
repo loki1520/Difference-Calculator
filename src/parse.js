@@ -8,7 +8,7 @@ const parseToJSObject = (data, extention) => {
     case '.yaml':
       return yaml.load(data);
     default:
-      throw new Error('Произошла ошибка!');
+      throw new Error('Attention! This file format is not supported!');
   }
 };
 
