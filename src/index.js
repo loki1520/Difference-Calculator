@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import render from './render.js';
-import parse from './parse.js';
+import parse from './parses.js';
 
 const getCurrentWorkDir = () => process.cwd();
 const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), filepath);
