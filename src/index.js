@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import render from './render.js';
-import parse from './parses.js';
+import parses from './parses.js';
 
 const getCurrentWorkDir = () => process.cwd();
 const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), filepath);
@@ -9,7 +9,7 @@ const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), file
 const getObj = (pathFile) => {
   const datasFile = fs.readFileSync(pathFile, 'utf-8');
   const extentionFile = path.extname(pathFile);
-  return parse(datasFile, extentionFile);
+  return parses(datasFile, extentionFile);
 };
 
 const genDiff = (filepath1, filepath2) => {
