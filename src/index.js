@@ -5,11 +5,10 @@ import parse from './parse.js';
 
 const getCurrentWorkDir = () => process.cwd();
 const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), filepath);
-const extention = (filepath) => path.extname(filepath);
 
 const getObj = (pathFile) => {
   const datasFile = fs.readFileSync(pathFile, 'utf-8');
-  const extentionFile = extention(pathFile);
+  const extentionFile = path.extname(pathFile);
   return parse(datasFile, extentionFile);
 };
 
