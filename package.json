@@ -9,12 +9,13 @@
   "description": "[![Actions Status](https://github.com/loki1520/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/loki1520/frontend-project-46/actions)",
   "scripts": {
     "test": "npx jest",
-    "test:watch": "jest --watch"
+    "test:watch": "npx jest --watch"
   },
   "author": "Ivan Ivashchenko",
   "license": "ISC",
   "dependencies": {
     "commander": "^11.0.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

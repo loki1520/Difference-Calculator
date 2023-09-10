@@ -1,11 +1,16 @@
 import path from 'path';
 import fs from 'fs';
 import render from './render.js';
+import parses from './parses.js';
 
 const getCurrentWorkDir = () => process.cwd();
 const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), filepath);
-const getObj = (data) => JSON.parse(fs.readFileSync(data, 'utf-8'));
-// const extention = (filepath) => path.extname(filepath);
+
+const getObj = (pathFile) => {
+  const datasFile = fs.readFileSync(pathFile, 'utf-8');
+  const extentionFile = path.extname(pathFile);
+  return parses(datasFile, extentionFile);
+};
 
 const genDiff = (filepath1, filepath2) => {
   const absolutePathToFile1 = getAbsolutePathFile(filepath1);
