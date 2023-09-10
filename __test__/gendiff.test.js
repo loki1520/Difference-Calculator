@@ -13,6 +13,6 @@ const renderResult = genDiff(getFixturePath('file1.json'), getFixturePath('file2
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 const expected = readFile('expectResult.txt');
 
-test('renderResult must be equal "expectResult.txt"', () => {
+test('testing lines difference in .json format', () => {
   expect(renderResult).toEqual(expected);
 });
