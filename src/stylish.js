@@ -1,9 +1,21 @@
 import _ from 'lodash';
 import getTree from './getTree.js';
 
+const stringify = (currentValue, depth) => {
+  if (!_.isObject(currentValue)) {
+    return `${currentValue}`;
+  }
+
+  const currentIndent = ' '.repeat(depth * 4);
+  const bracketIndent = ' '.repeat(depth * 4 - 4);
+  const lines = Object
+    .entries(currentValue)
+    .map(([key, value]) => `${currentIndent}${key}: ${stringify(value, depth + 1)}`);
+  return ['{', ...lines, `${bracketIndent}}`].join('\n');
+};
+
 const stylish = (obj1, obj2) => {
   const prepairedTree = getTree(obj1, obj2);
-  console.log(prepairedTree);
   const getRender = (tree, deep = 1) => {
     const currentIndent = ' '.repeat(deep * 4 - 2);
     const indentOfEnds = ' '.repeat(deep * 4 - 4);
@@ -13,16 +25,16 @@ const stylish = (obj1, obj2) => {
         return `${acc}${currentIndent}  ${obj.key}: ${getRender(obj.value, deep + 1)}\n`;
       }
       if (obj.type === 'unchanged') {
-        return `${acc}${currentIndent}  ${obj.key}: ${obj.value}\n`;
+        return `${acc}${currentIndent}  ${obj.key}: ${stringify(obj.value, deep + 1)}\n`;
       }
       if (obj.type === 'changed') {
-        return `${acc}${currentIndent}- ${obj.key}: ${obj.value1}\n${currentIndent}+ ${obj.key}: ${obj.value2}\n`;
+        return `${acc}${currentIndent}- ${obj.key}: ${stringify(obj.value1, deep + 1)}\n${currentIndent}+ ${obj.key}: ${stringify(obj.value2, deep + 1)}\n`;
       }
       if (obj.type === 'deleted') {
-        return `${acc}${currentIndent}- ${obj.key}: ${obj.value}\n`;
+        return `${acc}${currentIndent}- ${obj.key}: ${stringify(obj.value, deep + 1)}\n`;
       }
       if (obj.type === 'added') {
-        return `${acc}${currentIndent}+ ${obj.key}: ${obj.value}\n`;
+        return `${acc}${currentIndent}+ ${obj.key}: ${stringify(obj.value, deep + 1)}\n`;
       }
       return acc;
     }, '');
@@ -94,18 +106,3 @@ const y = {
 };
 
 console.log(stylish(x, y));
-
-// const z = {
-//   "host": "hexlet.io",
-//   "timeout": 50,
-//   "proxy": "123.234.53.22",
-//   "follow": false
-// };
-
-// const a = {
-//   "timeout": 20,
-//   "verbose": true,
-//   "host": "hexlet.io"
-// };
-
-// console.log(stylish(z, a));

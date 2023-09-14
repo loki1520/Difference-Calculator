@@ -1,21 +1,16 @@
 import _ from 'lodash';
 
-const stringify = (data, sign = ' ', quantitySign = 1, deep = 1) => {
-  if (!_.isObject(data)) {
-    return `${data}`;
+const stringify = (currentValue, depth = 1) => {
+  if (!_.isObject(currentValue)) {
+    return `${currentValue}`;
   }
 
-  const markLines = sign.repeat(deep * quantitySign);
-  const markEnds = sign.repeat((deep - 1) * quantitySign);
-
-  const prepairedString = Object.entries(data).reduce((acc, [key, value]) => {
-    if (_.isObject(value)) {
-      return `${acc}${markLines}${key}: ${stringify(value, sign, quantitySign, deep + 1)}\n`;
-    }
-    return `${acc}${markLines}${key}: ${value}\n`;
-  }, '');
-
-  return `{\n${prepairedString}${markEnds}}`;
+  const currentIndent = ' '.repeat(depth * 4);
+  const bracketIndent = ' '.repeat(depth * 4 - 4);
+  const lines = Object
+    .entries(currentValue)
+    .map(([key, value]) => `${currentIndent}${key}: ${stringify(value, depth + 1)}`);
+  return ['{', ...lines, `${bracketIndent}}`].join('\n');
 };
 
 const nested = {
@@ -39,4 +34,4 @@ const nested = {
   },
 };
 
-console.log(stringify(nested, '+', 1));
+console.log(stringify(nested));
