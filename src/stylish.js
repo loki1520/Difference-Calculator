@@ -2,6 +2,7 @@ import _ from 'lodash';
 import getTree from './getTree.js';
 
 const getIndent = (depth) => ' '.repeat(depth * 4 - 2);
+const getIndentEnd = (depth) => ' '.repeat(depth * 4 - 4);
 const signOfDiffer = {
   nested: '  ',
   unchanged: '  ',
@@ -16,7 +17,7 @@ const stringify = (currentValue, depth) => {
   const lines = Object
     .entries(currentValue)
     .map(([key, value]) => `${getIndent(depth)}${signOfDiffer.unchanged}${key}: ${stringify(value, depth + 1)}`);
-  return `{\n${lines.join('\n')}\n${getIndent(depth - 1)}  }`;
+  return `{\n${lines.join('\n')}\n${getIndentEnd(depth)}}`;
 };
 
 const stylish = (obj1, obj2) => {
@@ -42,7 +43,7 @@ const stylish = (obj1, obj2) => {
       }
     }, '');
 
-    return `{\n${result}${' '.repeat(depth * 4 - 4)}}`;
+    return `{\n${result}${getIndentEnd(depth)}}`;
   };
   return getRender(prepairedTree);
 };
