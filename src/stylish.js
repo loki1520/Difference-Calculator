@@ -11,7 +11,7 @@ const signOfDiffer = {
 
 const stringify = (currentValue, depth) => {
   if (!_.isObject(currentValue)) {
-    return String(currentValue);
+    return `${currentValue}`;
   }
   const lines = Object
     .entries(currentValue)
@@ -22,21 +22,19 @@ const stringify = (currentValue, depth) => {
 const stylish = (obj1, obj2) => {
   const prepairedTree = getTree(obj1, obj2);
   const getRender = (tree, depth = 1) => {
-    const result = tree.reduce((acc, {
-      key, value, valueDeleted, valueAdded, type,
-    }) => {
-      switch (type) {
+    const result = tree.reduce((acc, obj) => {
+      switch (obj.type) {
         case 'nested':
-          return `${acc}${getIndent(depth)}${signOfDiffer[type]}${key}: ${getRender(value, depth + 1)}\n`;
+          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${getRender(obj.value, depth + 1)}\n`;
         case 'unchanged':
-          return `${acc}${getIndent(depth)}${signOfDiffer[type]}${key}: ${stringify(value, depth + 1)}\n`;
+          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
         case 'deleted':
-          return `${acc}${getIndent(depth)}${signOfDiffer[type]}${key}: ${stringify(value, depth + 1)}\n`;
+          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
         case 'added':
-          return `${acc}${getIndent(depth)}${signOfDiffer[type]}${key}: ${stringify(value, depth + 1)}\n`;
+          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
         case 'changed': {
-          const deleteValue = `${getIndent(depth)}${signOfDiffer.deleted}${key}: ${stringify(valueDeleted, depth + 1)}\n`;
-          const addedValue = `${getIndent(depth)}${signOfDiffer.added}${key}: ${stringify(valueAdded, depth + 1)}\n`;
+          const deleteValue = `${getIndent(depth)}${signOfDiffer.deleted}${obj.key}: ${stringify(obj.valueDeleted, depth + 1)}\n`;
+          const addedValue = `${getIndent(depth)}${signOfDiffer.added}${obj.key}: ${stringify(obj.valueAdded, depth + 1)}\n`;
           return `${acc}${deleteValue}${addedValue}`;
         }
         default:
