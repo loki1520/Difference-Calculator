@@ -23,8 +23,8 @@ const getTree = (obj1, obj2) => {
     }
     return {
       key,
-      value1: obj1[key],
-      value2: obj2[key],
+      valueDeleted: obj1[key],
+      valueAdded: obj2[key],
       type: 'changed',
     };
   });
