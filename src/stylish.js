@@ -1,108 +1,50 @@
 import _ from 'lodash';
 import getTree from './getTree.js';
 
+const getIndent = (depth) => ' '.repeat(depth * 4 - 2);
+const signOfDiffer = {
+  nested: '  ',
+  unchanged: '  ',
+  deleted: '- ',
+  added: '+ ',
+};
+
 const stringify = (currentValue, depth) => {
   if (!_.isObject(currentValue)) {
     return `${currentValue}`;
   }
-
-  const currentIndent = ' '.repeat(depth * 4);
-  const bracketIndent = ' '.repeat(depth * 4 - 4);
   const lines = Object
     .entries(currentValue)
-    .map(([key, value]) => `${currentIndent}${key}: ${stringify(value, depth + 1)}`);
-  return ['{', ...lines, `${bracketIndent}}`].join('\n');
+    .map(([key, value]) => `${getIndent(depth)}${signOfDiffer.unchanged}${key}: ${stringify(value, depth + 1)}`);
+  return `{\n${lines.join('\n')}\n${getIndent(depth - 1)}  }`;
 };
 
 const stylish = (obj1, obj2) => {
   const prepairedTree = getTree(obj1, obj2);
-  const getRender = (tree, deep = 1) => {
-    const currentIndent = ' '.repeat(deep * 4 - 2);
-    const indentOfEnds = ' '.repeat(deep * 4 - 4);
-
+  const getRender = (tree, depth = 1) => {
     const result = tree.reduce((acc, obj) => {
-      if (obj.type === 'nested') {
-        return `${acc}${currentIndent}  ${obj.key}: ${getRender(obj.value, deep + 1)}\n`;
+      switch (obj.type) {
+        case 'nested':
+          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${getRender(obj.value, depth + 1)}\n`;
+        case 'unchanged':
+          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
+        case 'deleted':
+          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
+        case 'added':
+          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
+        case 'changed': {
+          const deleteValue = `${getIndent(depth)}${signOfDiffer.deleted}${obj.key}: ${stringify(obj.value1, depth + 1)}\n`;
+          const addedValue = `${getIndent(depth)}${signOfDiffer.added}${obj.key}: ${stringify(obj.value2, depth + 1)}\n`;
+          return `${acc}${deleteValue}${addedValue}`;
+        }
+        default:
+          return acc;
       }
-      if (obj.type === 'unchanged') {
-        return `${acc}${currentIndent}  ${obj.key}: ${stringify(obj.value, deep + 1)}\n`;
-      }
-      if (obj.type === 'changed') {
-        return `${acc}${currentIndent}- ${obj.key}: ${stringify(obj.value1, deep + 1)}\n${currentIndent}+ ${obj.key}: ${stringify(obj.value2, deep + 1)}\n`;
-      }
-      if (obj.type === 'deleted') {
-        return `${acc}${currentIndent}- ${obj.key}: ${stringify(obj.value, deep + 1)}\n`;
-      }
-      if (obj.type === 'added') {
-        return `${acc}${currentIndent}+ ${obj.key}: ${stringify(obj.value, deep + 1)}\n`;
-      }
-      return acc;
     }, '');
 
-    return `{\n${result}${indentOfEnds}}`;
+    return `{\n${result}${' '.repeat(depth * 4 - 4)}}`;
   };
   return getRender(prepairedTree);
 };
 
 export default stylish;
-
-const x = {
-  common: {
-    setting1: 'Value 1',
-    setting2: 200,
-    setting3: true,
-    setting6: {
-      key: 'value',
-      doge: {
-        wow: '',
-      },
-    },
-  },
-  group1: {
-    baz: 'bas',
-    foo: 'bar',
-    nest: {
-      key: 'value',
-    },
-  },
-  group2: {
-    abc: 12345,
-    deep: {
-      id: 45,
-    },
-  },
-};
-
-const y = {
-  common: {
-    follow: false,
-    setting1: 'Value 1',
-    setting3: null,
-    setting4: 'blah blah',
-    setting5: {
-      key5: 'value5',
-    },
-    setting6: {
-      key: 'value',
-      ops: 'vops',
-      doge: {
-        wow: 'so much',
-      },
-    },
-  },
-  group1: {
-    foo: 'bar',
-    baz: 'bars',
-    nest: 'str',
-  },
-  group3: {
-    deep: {
-      id: {
-        number: 45,
-      },
-    },
-    fee: 100500,
-  },
-};
-
-console.log(stylish(x, y));
