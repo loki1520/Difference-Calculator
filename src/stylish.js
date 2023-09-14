@@ -28,9 +28,7 @@ const stylish = (obj1, obj2) => {
         case 'nested':
           return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${getRender(obj.value, depth + 1)}\n`;
         case 'unchanged':
-          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
         case 'deleted':
-          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
         case 'added':
           return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
         case 'changed': {
