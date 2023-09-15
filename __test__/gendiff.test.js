@@ -13,7 +13,7 @@ const renderResult = (file1, file2) => genDiff(getFixturePath(file1), getFixture
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 const expectedFlat = readFile('expectResult.txt').trim();
 const expectedNested = readFile('nestedExpectDiff.txt').trim();
-const expectedPlain = readFile('plainExpectDiff.txt').trim();
+// const expectedPlain = readFile('plainExpectDiff.txt').trim();
 
 test('test_1: flat lines difference in .json formats', () => {
   expect(renderResult('file1.json', 'file2.json')).toEqual(expectedFlat);
