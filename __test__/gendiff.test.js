@@ -13,6 +13,7 @@ const renderResult = (file1, file2) => genDiff(getFixturePath(file1), getFixture
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 const expectedFlat = readFile('expectResult.txt').trim();
 const expectedNested = readFile('nestedExpectDiff.txt').trim();
+const expectedPlain = readFile('plainExpectDiff.txt').trim();
 
 test('test_1: flat lines difference in .json formats', () => {
   expect(renderResult('file1.json', 'file2.json')).toEqual(expectedFlat);
@@ -41,3 +42,7 @@ test('test_6: nested lines difference in .yml formats', () => {
 test('test_7: nested lines difference in .yaml && .json formats', () => {
   expect(renderResult('nestedFilepath1.yaml', 'nestedFile2.json')).toEqual(expectedNested);
 });
+
+// test('test_8: plain lines difference in .yaml && .json formats', () => {
+//   expect(renderResult('nestedFile1.json', 'nestedFile2.json')).toEqual(expectedPlain);
+// });
