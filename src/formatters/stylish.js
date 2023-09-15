@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import getTree from './getTree.js';
+import getTree from '../getTree.js';
 
 const getIndent = (depth) => ' '.repeat(depth * 4 - 2);
 const signOfDiffer = {

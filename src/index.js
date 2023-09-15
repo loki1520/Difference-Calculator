@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import render from './stylish.js';
+import render from './formatters/stylish.js';
 import parses from './parses.js';
 
 const getCurrentWorkDir = () => process.cwd();
