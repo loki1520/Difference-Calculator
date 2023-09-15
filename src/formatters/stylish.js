@@ -16,13 +16,13 @@ const stringify = (currentValue, depth) => {
   const lines = Object
     .entries(currentValue)
     .map(([key, value]) => `${getIndent(depth)}${signOfDiffer.unchanged}${key}: ${stringify(value, depth + 1)}`);
-  return `{\n${lines.join('\n')}\n${getIndent(depth, 4)}}`;
+  return ['{', ...lines, `${getIndent(depth, 4)}}`].join('\n');
 };
 
 const stylish = (obj1, obj2) => {
   const prepairedTree = getTree(obj1, obj2);
-  const getRender = (tree, depth = 1) => {
-    const lines = tree.map((obj) => {
+  const getRender = (array, depth = 1) => {
+    const lines = array.map((obj) => {
       switch (obj.type) {
         case 'nested':
           return `${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${getRender(obj.value, depth + 1)}`;
@@ -40,7 +40,6 @@ const stylish = (obj1, obj2) => {
       }
     });
     return ['{', ...lines, `${getIndent(depth, 4)}}`].join('\n');
-    // return `{\n${result}${getIndent(depth, 4)}}`;
   };
   return getRender(prepairedTree);
 };
