@@ -8,7 +8,7 @@ const typeConclusion = {
   json,
 };
 
-const resultConclusion = (obj1, obj2, format) => typeConclusion[format](obj1, obj2);
+const resultConclusion = (obj1, obj2, format = 'stylish') => typeConclusion[format](obj1, obj2);
 
 export default resultConclusion;
 
