@@ -11,11 +11,11 @@ const outputValue = (value) => {
   return value;
 };
 
-const lines = (data, path = '') => data.reduce((acc, obj) => {
+const getLines = (data, path = '') => data.reduce((acc, obj) => {
   const fullPath = `${path}${obj.key}.`;
   switch (obj.type) {
     case 'nested':
-      return `${acc}${lines(obj.value, fullPath)}`;
+      return `${acc}${getLines(obj.value, fullPath)}`;
     case 'added':
       return `${acc}Property '${fullPath.slice(0, -1)}' was added with value: ${outputValue(obj.value)}\n`;
     case 'deleted':
@@ -29,7 +29,7 @@ const lines = (data, path = '') => data.reduce((acc, obj) => {
 
 const getPlainFormat = (obj1, obj2) => {
   const prepairedTree = getTree(obj1, obj2);
-  return lines(prepairedTree).trim();
+  return getLines(prepairedTree).trim();
 };
 
 export default getPlainFormat;
