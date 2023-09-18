@@ -24,11 +24,11 @@ test('test_2: nested lines difference from .json\'s formats', () => {
 });
 
 test('test_3: nested lines difference from .yml\'s formats', () => {
-  expect(renderResult('filepath1.yaml', 'filepath2.yaml')).toEqual(expectedNested);
+  expect(renderResult('filepath1.yml', 'filepath2.yml')).toEqual(expectedNested);
 });
 
-test('test_4: nested lines difference from .yaml && .json formats', () => {
-  expect(renderResult('filepath1.yaml', 'file2.json')).toEqual(expectedNested);
+test('test_4: nested lines difference from .yml && .json formats', () => {
+  expect(renderResult('filepath1.yml', 'file2.json')).toEqual(expectedNested);
 });
 
 test('test_5: plain lines difference from .json\'s formats', () => {
@@ -36,13 +36,13 @@ test('test_5: plain lines difference from .json\'s formats', () => {
 });
 
 test('test_6: plain lines difference from in .yml\'s formats', () => {
-  expect(renderResult('filepath1.yaml', 'filepath2.yaml', 'plain')).toEqual(expectedPlain);
+  expect(renderResult('filepath1.yml', 'filepath2.yml', 'plain')).toEqual(expectedPlain);
 });
 
-test('test_7: plain lines difference from .yaml && .json formats', () => {
-  expect(renderResult('file1.json', 'filepath2.yaml', 'plain')).toEqual(expectedPlain);
+test('test_7: plain lines difference from .yml && .json formats', () => {
+  expect(renderResult('file1.json', 'filepath2.yml', 'plain')).toEqual(expectedPlain);
 });
 
 test('test_8: JSON lines difference from .yaml && .json formats', () => {
-  expect(renderResult('filepath1.yaml', 'file2.json', 'json')).toEqual(expectedJson);
+  expect(renderResult('filepath1.yml', 'file2.json', 'json')).toEqual(expectedJson);
 });
