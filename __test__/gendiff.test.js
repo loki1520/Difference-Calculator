@@ -13,31 +13,36 @@ const renderResult = (file1, file2, format = 'stylish') => genDiff(getFixturePat
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 const expectedNested = readFile('expectDiffStylish.txt').trim();
 const expectedPlain = readFile('expectDiffPlain.txt').trim();
+const expectedJson = readFile('expectedDiffJson.txt').trim();
 
 test('test_1: check throw new Error: Attention! This file format is not supported!', () => {
   expect(() => renderResult('file1.json', 'filepath.wrong')).toThrow('Attention! This file format is not supported!');
 });
 
-test('test_2: nested lines difference in .json\'s formats', () => {
+test('test_2: nested lines difference from .json\'s formats', () => {
   expect(renderResult('file1.json', 'file2.json')).toEqual(expectedNested);
 });
 
-test('test_3: nested lines difference in .yml\'s formats', () => {
+test('test_3: nested lines difference from .yml\'s formats', () => {
   expect(renderResult('filepath1.yaml', 'filepath2.yaml')).toEqual(expectedNested);
 });
 
-test('test_4: nested lines difference in .yaml && .json formats', () => {
+test('test_4: nested lines difference from .yaml && .json formats', () => {
   expect(renderResult('filepath1.yaml', 'file2.json')).toEqual(expectedNested);
 });
 
-test('test_5: plain lines difference in .json\'s formats', () => {
+test('test_5: plain lines difference from .json\'s formats', () => {
   expect(renderResult('file1.json', 'file2.json', 'plain')).toEqual(expectedPlain);
 });
 
-test('test_6: plain lines difference in in .yml\'s formats', () => {
+test('test_6: plain lines difference from in .yml\'s formats', () => {
   expect(renderResult('filepath1.yaml', 'filepath2.yaml', 'plain')).toEqual(expectedPlain);
 });
 
-test('test_7: plain lines difference in .yaml && .json formats', () => {
+test('test_7: plain lines difference from .yaml && .json formats', () => {
   expect(renderResult('file1.json', 'filepath2.yaml', 'plain')).toEqual(expectedPlain);
+});
+
+test('test_8: JSON lines difference from .yaml && .json formats', () => {
+  expect(renderResult('filepath1.yaml', 'file2.json', 'json')).toEqual(expectedJson);
 });
