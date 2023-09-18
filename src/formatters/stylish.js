@@ -21,8 +21,8 @@ const stringify = (currentValue, depth) => {
 
 const stylish = (obj1, obj2) => {
   const prepairedTree = getTree(obj1, obj2);
-  const getRender = (array, depth = 1) => {
-    const lines = array.map((obj) => {
+  const getRender = (treeAST, depth = 1) => {
+    const lines = treeAST.map((obj) => {
       switch (obj.type) {
         case 'nested':
           return `${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${getRender(obj.value, depth + 1)}`;
