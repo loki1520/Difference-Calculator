@@ -8,10 +8,8 @@ const resultConclusion = (obj1, obj2, format) => {
       return plain(obj1, obj2);
     case 'json':
       return json(obj1, obj2);
-    case 'stylish':
-      return stylish(obj1, obj2);
     default:
-      throw new Error('Attention! This file format is not supported!');
+      return stylish(obj1, obj2);
   }
 };
 
