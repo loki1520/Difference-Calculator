@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import getTree from './getTree.js';
+import getTree from '../getTree.js';
 
-const getIndent = (depth) => ' '.repeat(depth * 4 - 2);
+const getIndent = (depth, count = 2) => ' '.repeat(depth * 4 - count);
 const signOfDiffer = {
   nested: '  ',
   unchanged: '  ',
@@ -16,31 +16,30 @@ const stringify = (currentValue, depth) => {
   const lines = Object
     .entries(currentValue)
     .map(([key, value]) => `${getIndent(depth)}${signOfDiffer.unchanged}${key}: ${stringify(value, depth + 1)}`);
-  return `{\n${lines.join('\n')}\n${' '.repeat(depth * 4 - 4)}}`;
+  return ['{', ...lines, `${getIndent(depth, 4)}}`].join('\n');
 };
 
 const stylish = (obj1, obj2) => {
   const prepairedTree = getTree(obj1, obj2);
-  const getRender = (tree, depth = 1) => {
-    const result = tree.reduce((acc, obj) => {
+  const getRender = (treeAST, depth = 1) => {
+    const lines = treeAST.map((obj) => {
       switch (obj.type) {
         case 'nested':
-          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${getRender(obj.value, depth + 1)}\n`;
+          return `${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${getRender(obj.value, depth + 1)}`;
         case 'unchanged':
         case 'deleted':
         case 'added':
-          return `${acc}${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}\n`;
+          return `${getIndent(depth)}${signOfDiffer[obj.type]}${obj.key}: ${stringify(obj.value, depth + 1)}`;
         case 'changed': {
           const deleteValue = `${getIndent(depth)}${signOfDiffer.deleted}${obj.key}: ${stringify(obj.valueDeleted, depth + 1)}\n`;
-          const addedValue = `${getIndent(depth)}${signOfDiffer.added}${obj.key}: ${stringify(obj.valueAdded, depth + 1)}\n`;
-          return `${acc}${deleteValue}${addedValue}`;
+          const addedValue = `${getIndent(depth)}${signOfDiffer.added}${obj.key}: ${stringify(obj.valueAdded, depth + 1)}`;
+          return `${deleteValue}${addedValue}`;
         }
         default:
-          return acc;
+          return '';
       }
-    }, '');
-
-    return `{\n${result}${' '.repeat(depth * 4 - 4)}}`;
+    });
+    return ['{', ...lines, `${getIndent(depth, 4)}}`].join('\n');
   };
   return getRender(prepairedTree);
 };

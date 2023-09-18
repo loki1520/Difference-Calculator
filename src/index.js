@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import render from './stylish.js';
+import resultConclusion from './formatters/index.js';
 import parses from './parses.js';
 
 const getCurrentWorkDir = () => process.cwd();
@@ -12,12 +12,12 @@ const getObj = (pathFile) => {
   return parses(datasFile, extentionFile);
 };
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, format) => {
   const absolutePathToFile1 = getAbsolutePathFile(filepath1);
   const absolutePathToFile2 = getAbsolutePathFile(filepath2);
   const obj1 = getObj(absolutePathToFile1);
   const obj2 = getObj(absolutePathToFile2);
 
-  return render(obj1, obj2);
+  return resultConclusion(obj1, obj2, format);
 };
 export default genDiff;
