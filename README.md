@@ -67,4 +67,4 @@ Property 'group3' was added with value: [complex value]
 #### Presents
 You can use ```gendiff``` to find the difference both for flat and nested YAML/JSON files.
 
-[![asciicast](https://asciinema.org/a/5Hli01rQz6mSYx3FZ9qBQm6J3.svg)](https://asciinema.org/a/5Hli01rQz6mSYx3FZ9qBQm6J3)
+[![asciicast](https://asciinema.org/a/MSBqrs2WkghzKsE9GFOmwbMMZ.svg)](https://asciinema.org/a/MSBqrs2WkghzKsE9GFOmwbMMZ)
