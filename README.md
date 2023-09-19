@@ -42,9 +42,12 @@ The program can display differences in three formats:
 * json
 
 
-To specify data output type, you must add this type name with the flag -f: (-f plain, -f json, -f stylish(default))
+To run the program, you must specify the ```gendiff``` command and then absolute (or relative) paths to the comparison files.
 
-For example, below is the output in flat **plain** format of calculating the differences between two files:
+To specify data output type, you must add this type name with the flag -f: (```-f plain```, ```-f json```, ```-f stylish```(default))
+
+For example, below is the output in flat **plain** format of calculating the differences between two files 
+(If you are in the same directory as these files):
 
 ```
 gendiff -f plain file1.json file2.json
@@ -63,3 +66,5 @@ Property 'group3' was added with value: [complex value]
 ```
 #### Presents
 You can use ```gendiff``` to find the difference both for flat and nested YAML/JSON files.
+
+[![asciicast](https://asciinema.org/a/5Hli01rQz6mSYx3FZ9qBQm6J3.svg)](https://asciinema.org/a/5Hli01rQz6mSYx3FZ9qBQm6J3)
