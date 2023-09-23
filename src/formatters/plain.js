@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import getTree from '../getTree.js';
 
 const outputValue = (value) => {
   if (_.isObject(value)) {
@@ -27,9 +26,6 @@ const getLines = (data, path = '') => data.reduce((acc, obj) => {
   }
 }, '');
 
-const getPlainFormat = (obj1, obj2) => {
-  const prepairedTree = getTree(obj1, obj2);
-  return getLines(prepairedTree).trim();
-};
+const getPlainFormat = (difTree) => getLines(difTree).trim();
 
 export default getPlainFormat;

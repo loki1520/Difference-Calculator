@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import resultConclusion from './formatters/index.js';
 import parses from './parses.js';
+import getTree from './getTree.js';
 
 const getCurrentWorkDir = () => process.cwd();
 const getAbsolutePathFile = (filepath) => path.resolve(getCurrentWorkDir(), filepath);
@@ -17,7 +18,7 @@ const genDiff = (filepath1, filepath2, format) => {
   const absolutePathToFile2 = getAbsolutePathFile(filepath2);
   const obj1 = getObj(absolutePathToFile1);
   const obj2 = getObj(absolutePathToFile2);
-
-  return resultConclusion(obj1, obj2, format);
+  const difTree = getTree(obj1, obj2);
+  return resultConclusion(difTree, format);
 };
 export default genDiff;

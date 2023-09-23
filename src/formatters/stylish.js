@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import getTree from '../getTree.js';
 
 const getIndent = (depth, count = 2) => ' '.repeat(depth * 4 - count);
 const signOfDiffer = {
@@ -19,8 +18,7 @@ const stringify = (currentValue, depth) => {
   return ['{', ...lines, `${getIndent(depth, 4)}}`].join('\n');
 };
 
-const stylish = (obj1, obj2) => {
-  const prepairedTree = getTree(obj1, obj2);
+const stylish = (difTree) => {
   const getRender = (treeAST, depth = 1) => {
     const lines = treeAST.map((obj) => {
       switch (obj.type) {
@@ -41,7 +39,7 @@ const stylish = (obj1, obj2) => {
     });
     return ['{', ...lines, `${getIndent(depth, 4)}}`].join('\n');
   };
-  return getRender(prepairedTree);
+  return getRender(difTree);
 };
 
 export default stylish;
