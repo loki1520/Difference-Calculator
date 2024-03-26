@@ -19,7 +19,7 @@ v18.0.0
 #### Installation:
 
 ```
-$ git clone https://github.com/loki1520/frontend-project-46.git
+$ git clone https://github.com/loki1520/Difference-Calculator.git    
 $ cd frontend-project-46
 $ make install
 ```
